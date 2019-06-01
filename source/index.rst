@@ -12,8 +12,8 @@
    大数据 <bigdata/bigdata.rst>
    云计算 <cloud/cloud.rst>
    自然语言 <nlp/nlp.rst>
-   项目 <project/project.rst>
-   题目 <problem/problem.rst>
+   项目集锦 <project/project.rst>
+   题目集锦 <problem/problem.rst>
    常用工具 <tools/tools.rst>
 
 

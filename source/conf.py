@@ -30,14 +30,35 @@ author = 'gavin'
 # ones.
 extensions = [
     'sphinx_markdown_tables',
-    'recommonmark'
+    'recommonmark',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.todo',
+    'sphinx.ext.coverage',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.ifconfig',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.githubpages',
+    'sphinxcontrib.fulltoc',
 ]
+
+mathjax_config = {
+    'extensions': ['tex2jax.js'],
+    'jax': ['input/TeX', 'output/HTML-CSS'],
+    'ex2jax': {
+        'inlineMath': [ ['$','$'], ["\\(","\\)"] ],
+        'displayMath': [ ['$$','$$'], ["\\[","\\]"] ],
+        'processEscapes': 'true'
+     },
+     "HTML-CSS": { 'fonts': ["TeX"] }
+}
+
 source_suffix = {
     '.rst': 'restructuredtext',
     '.txt': 'markdown',
     '.md': 'markdown',
 }
-#source_suffix = ['.rst', '.md']
 
 
 # Add any paths that contain templates here, relative to this directory.
