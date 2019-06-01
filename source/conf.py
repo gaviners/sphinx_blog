@@ -35,24 +35,23 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
+    'sphinx.ext.mathjax',
     'sphinx.ext.coverage',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
-    'sphinxcontrib.fulltoc',
 ]
 
-#    'sphinx.ext.mathjax',
-#mathjax_config = {
-#    'extensions': ['tex2jax.js'],
-#    'jax': ['input/TeX', 'output/HTML-CSS'],
-#    'ex2jax': {
-#        'inlineMath': [ ['$','$'], ["\\(","\\)"] ],
-#        'displayMath': [ ['$$','$$'], ["\\[","\\]"] ],
-#        'processEscapes': 'true'
-#     },
-#     "HTML-CSS": { 'fonts': ["TeX"] }
-#}
+mathjax_config = {
+    'extensions': ['tex2jax.js'],
+    'jax': ['input/TeX', 'output/HTML-CSS'],
+    'ex2jax': {
+        'inlineMath': [ ['$','$'], ["\\(","\\)"] ],
+        'displayMath': [ ['$$','$$'], ["\\[","\\]"] ],
+        'processEscapes': 'true'
+     },
+     "HTML-CSS": { 'fonts': ["TeX"] }
+}
 
 source_suffix = {
     '.rst': 'restructuredtext',
