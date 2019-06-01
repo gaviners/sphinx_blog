@@ -3,18 +3,11 @@
 
 
 ## 1、sigmoid函数
-   sigmoid函数，也就是s型曲线函数，如下：
+sigmoid函数，也就是s型曲线函数，如下： 
 
+![func-e](sig_images/math-1.png)
 
-$$
-函数：f(z)=\frac{1}{1+e^{-z}}
-$$
-
-$$
-导数：f'(z)=f(z)(1-f(z))
-$$
-
-   上面是我们常见的形式，虽然知道这样的形式，也知道计算流程，不够感觉并不太直观，下面来分析一下。
+  上面是我们常见的形式，虽然知道这样的形式，也知道计算流程，不够感觉并不太直观，下面来分析一下。
 
 
 
@@ -42,20 +35,21 @@ $$
 
 ## 2、sigmoid函数求导
 
-   sigmoid导数具体的推导过程如下：
-$$
-\begin{aligned}f'(z) &= (\frac{1}{1+e^{-z}})' \\&= \frac{e^{-z}}{(1+e^{-z})^{2}} \\&= \frac{1+e^{-z}-1}{(1+e^{-z})^{2}}  \\&= \frac{1}{(1+e^{-z})}(1-\frac{1}{(1+e^{-z})}) \\&= f(z)(1-f(z))\\\end{aligned}
-$$
+sigmoid导数具体的推导过程如下：
+
+![func-e](sig_images/math-2.png)
 
 ## 3、神经网络损失函数求导
 
-   神经网络的损失函数可以理解为是一个多级的复合函数，求导使用链式法则。
+神经网络的损失函数可以理解为是一个多级的复合函数，求导使用链式法则。
 
-$$\begin{gather*} J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2\end{gather*}$$
+![func-e](sig_images/math-3.png)
 
-   先来说一下常规求导的过程：
+ 先来说一下常规求导的过程：
+$$
+e = (a+b)(b+1)
+$$
 
-        $e = (a+b)(b+1)$
 
 ![func-s1](sig_images/func-s1.png)
 
@@ -73,69 +67,60 @@ $$\begin{gather*} J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(
 
 ![func-nn](sig_images/func-nn.png)
 
-   那么我们会有两个初始的权重矩阵：
-$$
-\begin{aligned}\theta^{1} =\begin{bmatrix}\theta^1_{10} &\theta^1_{11}& \theta^1_{12}\\\theta^1_{20} &\theta^1_{21}& \theta^1_{22}\end{bmatrix}\\\\\theta^{2} =\begin{bmatrix}\theta^2_{10} &\theta^2_{11}& \theta^2_{12}\end{bmatrix}\end{aligned}
-$$
-   我们得到了上面的矩阵，现在我们以$sigmoid$函数作为激活函数，分别来计算每一层网络的激励（假设我们只有一个样本，输入是$x_1,x_2,$输出是$y$）；
+那么我们会有两个初始的权重矩阵：
 
-   第一层是输入，激励就是样本的特征值；记为:
-$$
-\begin{aligned}
-a^1 = 
-\begin{bmatrix}
-x_0
-\\
-x_1
-\\
-x_2
-\end{bmatrix}
-\end{aligned}
-$$
-        $x_0$是偏置项，为1.
+![func-e](sig_images/math-4.png)
 
-   第二层是隐藏层，激励通过特征值与区中相乘得到，然后取sigmoid函数变换，得到$a^2$，未变换之前的记为$z^2$：
-$$
-\begin{aligned}z^2_1 &=  \theta^1_{10} *x_0 + \theta^1_{11}*x_1+\theta^1_{12} * x_2\\z^2_2 &=  \theta^1_{20} *x_0 + \theta^1_{21}*x_1+\theta^1_{22} * x_2\\z^2 &= \begin{bmatrix}z^2_1\\z^2_2\end{bmatrix}\\a^2 &= sigmoid(z^2)\\a^2 &= \begin{bmatrix}1\\a^2_1\\a^2_2\end{bmatrix}\\\end{aligned}
-$$
-   在上面，我们最后加上了偏置项；
+ 我们得到了上面的矩阵，现在我们以$sigmoid$函数作为激活函数，分别来计算每一层网络的激励（假设我们只有一个样本，输入是$x_1,x_2,$输出是$y$）；
 
-   接下来第三层是输出层：
-$$
-\begin{aligned}z^3_1 &=  \theta^2_{10} *a^2_{0} + \theta^2_{11}*a^2_{1}+\theta^2_{12} * a^2_{2}\\z^3 &=\begin{bmatrix}z^3_1\end{bmatrix}\\a^3 &= sigmoid(z^3)\\a^3 &= \begin{bmatrix}a^3_1\end{bmatrix}\\\end{aligned}
-$$
-   因为是输出层了，所以不需要再往下计算，所以不加偏置项；
+第一层是输入，激励就是样本的特征值；记为:
+
+![func-e](sig_images/math-5.png)
+
+$x_0$是偏置项，为1.
+
+第二层是隐藏层，激励通过特征值与区中相乘得到，然后取sigmoid函数变换，得到$a^2$，未变换之前的记为$z^2$：
+
+ ![func-e](sig_images/math-6.png)
+
+在上面，我们最后加上了偏置项；
+
+接下来第三层是输出层：
+
+![func-e](sig_images/math-7.png)
+
+因为是输出层了，所以不需要再往下计算，所以不加偏置项；
 
    上面的计算流程，从输入到输出，我们也称为前向传播(Forward propagation)。
 
    然后，我们根据损失函数，写出损失函数的公式，在这里，只有一个输入，一个输出，所以损失函数写出来较为简单：
 
-   在这里，m=1;
-$$
-\begin{aligned}J(\Theta) &= - \frac{1}{m}  \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2\\& = - \frac{1}{m}\left[       y * log(a^3) + (1-y)* log(1-a^3)         \right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2\end{aligned}
-$$
-       说明：$$\frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2$$实际上就是所有的权重的平方和，一般不会将和偏置项相乘的那个放进来；这个项很简单，暂时先不管它，后面不暂时不写这一项（这个是正则化）。
-    
-      $$J(\Theta)  = - \frac{1}{m}\left[      y * log(a^3) + (1-y)* log(1-a^3) \right]$$
+在这里，m=1;
 
-   然后我们得到了上面的式子，这里我们知道，如果我们想要求$\theta^2_{12}$的偏导数的话，会发现，这个式子其实是一个复合函数，$y$是常数，$a^3$是$z^3$的$sigmoid$函数变换，而$z^3$则是$a^2$与权重相乘得来的，现在我们找到了权重在哪里，就可以开始求偏导了，在这里，$a^3$写成$s(z^3)$，然后，我们就得到了下面的推导：
-$$
-\begin{aligned}\frac{\partial J(\Theta)}{\partial \theta^2_{12}}& = - \frac{1}{m}\left[  y* \frac{1}{s(z^3)}  - (1-y) * \frac{1}{1-s(z^3)}  \right] * s(z^3)*(1-s(z^3)) * a^2_{12}\\&= - \frac{1}{m}\left[  y* (1-s(z^3)  -  (1-y) * s(z^3)  \right] * a^2_{12}\\&= - \frac{1}{m}\left[  y -s(z^3) \right] * a^2_{12}\\&= \frac{1}{m}\left[  s(z^3) -y  \right] * a^2_{12}\\&= \frac{1}{m}\left[  a^3 -y  \right] * a^2_{12}\end{aligned}
-$$
-   根据上面的推导，可以得到下面的式子：
-$$
-\begin{aligned}\frac{\partial J(\Theta)}{\partial \theta^2_{10}}&=  \frac{1}{m}\left[  a^3 -y  \right] * a^2_{10}\\\frac{\partial J(\Theta)}{\partial \theta^2_{11}}&= \frac{1}{m}\left[  a^3 -y  \right] * a^2_{11}\end{aligned}
-$$
-       所以，还记得前面所说的，我盟从上往下求导，保存当前对多个子单元的偏导数，根据上面的式子，我们知道，对于第二个权重矩阵的偏导，可以由$\left[  a^3 -y  \right] $乘以前一层网络的激励，然后除以样本个数来得到，因此有时候我们会将这个差值称为$\delta^3$，保存下来，使用矩阵的形式相乘，得到第二个权重矩阵的偏导数；
+![func-e](sig_images/math-8.png)
+
+说明：$\frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2$实际上就是所有的权重的平方和，一般不会将和偏置项相乘的那个放进来；这个项很简单，暂时先不管它，后面不暂时不写这一项（这个是正则化）。
+
+![func-e](sig_images/math-9.png)
+
+然后我们得到了上面的式子，这里我们知道，如果我们想要求$\theta^2_{12}$的偏导数的话，会发现，这个式子其实是一个复合函数，$y$是常数，$a^3$是$z^3$的$sigmoid$函数变换，而$z^3$则是$a^2$与权重相乘得来的，现在我们找到了权重在哪里，就可以开始求偏导了，在这里，$a^3$写成$s(z^3)$，然后，我们就得到了下面的推导：
+
+![func-e](sig_images/math-10.png)
+
+ 根据上面的推导，可以得到下面的式子：
+
+![func-e](sig_images/math-11.png)
+
+所以，还记得前面所说的，我盟从上往下求导，保存当前对多个子单元的偏导数，根据上面的式子，我们知道，对于第二个权重矩阵的偏导，可以由$\left[  a^3 -y  \right] $乘以前一层网络的激励，然后除以样本个数来得到，因此有时候我们会将这个差值称为$\delta^3$，保存下来，使用矩阵的形式相乘，得到第二个权重矩阵的偏导数；
 
    现在我们已经得到了第二个权重矩阵的偏导数，如何求第一个权重矩阵中的偏导数呢？
 
-   比如说，我们现在要对$\theta^1_{12}$求偏导：
-$$
-\begin{aligned}\frac{\partial J(\Theta)}{\partial \theta^1_{12}}& = - \frac{1}{m}\left[  y* \frac{1}{s(z^3)}  - (1-y) * \frac{1}{1-s(z^3)}  \right] * s(z^3)*(1-s(z^3)) * \theta^2_{11}*s(z^2)*(1-s(z^2))*x_2\\& = -\frac{1}{m}*\left[  a^3 -y  \right]  *  \theta^2_{11}*s(z^2)*(1-s(z^2))*x_2\\&= -\frac{1}{m} * \delta^3 *  \theta^2_{11}*s(z^2)*(1-s(z^2))*x_2\end{aligned}
-$$
-   从上线的式子，我们就可以看出来，我们保存的导数可以直接乘，如果而不用再次计算一遍，如果有多层网络，实际上后面的过程与这个是一样的，所以就得到了这样的式子：
-$$
-\delta^3 = a^3 - y\\\delta^2 = \delta^3 * (\theta^2)^T * s(z^2)'
-$$
-   因为这个网络就是3层，所以这样就得出了全部的偏导数，如果是多层，原理是一样的，不断地乘下去，从第二个式子开始，后面的形式都是一样的。
+比如说，我们现在要对$\theta^1_{12}$求偏导：
+
+![func-e](sig_images/math-12.png)
+
+从上线的式子，我们就可以看出来，我们保存的导数可以直接乘，如果而不用再次计算一遍，如果有多层网络，实际上后面的过程与这个是一样的，所以就得到了这样的式子：
+
+![func-e](sig_images/math-13.png)
+
+因为这个网络就是3层，所以这样就得出了全部的偏导数，如果是多层，原理是一样的，不断地乘下去，从第二个式子开始，后面的形式都是一样的。
