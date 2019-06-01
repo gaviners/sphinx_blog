@@ -24,6 +24,7 @@ sphinx-bootstrap-theme==0.7.1
 sphinx-markdown-tables==0.0.9
 sphinxcontrib-applehelp==1.0.1
 sphinxcontrib-devhelp==1.0.1
+sphinxcontrib-fulltoc==1.2.0
 sphinxcontrib-htmlhelp==1.0.2
 sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==1.0.2
